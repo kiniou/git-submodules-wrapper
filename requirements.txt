@@ -1,0 +1,4 @@
+daiquiri
+click
+click-completion
+GitPython
