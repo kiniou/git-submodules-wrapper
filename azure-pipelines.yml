@@ -19,20 +19,19 @@ jobs:
     vmImage: 'Ubuntu-16.04'
   container: python37
   steps:
-  - script: env
   - script: pip install --user tox
-  - script: tox -e py37
+  - script: ~/.local/bin/tox -e py37
 - job: pep8
   pool:
     vmImage: 'Ubuntu-16.04'
   container: python37
   steps:
   - script: pip install --user tox
-  - script: tox -e flake8
+  - script: ~/.local/bin/tox -e flake8
 - job: pylint
   pool:
     vmImage: 'Ubuntu-16.04'
   container: python37
   steps:
   - script: pip install --user tox
-  - script: tox -e pylint
+  - script: ~/.local/bin/tox -e pylint
