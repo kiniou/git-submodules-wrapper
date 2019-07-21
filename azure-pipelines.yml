@@ -14,30 +14,25 @@ resources:
     image: python:3.7-slim-buster
 
 jobs:
-- job: Setup
+- job: py37
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  container: python37
+  steps:
+  - script: env
+  - script: pip install --user tox
+  - script: tox -e py37
+- job: pep8
   pool:
     vmImage: 'Ubuntu-16.04'
   container: python37
   steps:
   - script: pip install --user tox
-- job: py37
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  container: python37
-  dependsOn: Setup
-  steps:
-  - script: tox -e py37'
-- job: pep8
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  container: python37
-  dependsOn: Setup
-  steps:
   - script: tox -e flake8
 - job: pylint
   pool:
     vmImage: 'Ubuntu-16.04'
   container: python37
-  dependsOn: Setup
   steps:
+  - script: pip install --user tox
   - script: tox -e pylint
