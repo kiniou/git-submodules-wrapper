@@ -1,3 +1,4 @@
+name: $(Date:yyyyMMdd)$(Rev:.r)
 trigger:
 - master
 
@@ -6,8 +7,6 @@ pr:
     include:
     - '*'
 
-pool:
-  vmImage: 'Ubuntu-16.04'
 
 resources:
   containers:
@@ -16,20 +15,28 @@ resources:
 
 jobs:
 - job: Setup
+  pool:
+    vmImage: 'Ubuntu-16.04'
   container: python37
   steps:
   - script: pip install tox
 - job: py37
+  pool:
+    vmImage: 'Ubuntu-16.04'
   container: python37
   dependsOn: Setup
   steps:
   - script: tox -e py37'
 - job: pep8
+  pool:
+    vmImage: 'Ubuntu-16.04'
   container: python37
   dependsOn: Setup
   steps:
   - script: tox -e flake8
 - job: pylint
+  pool:
+    vmImage: 'Ubuntu-16.04'
   container: python37
   dependsOn: Setup
   steps:
