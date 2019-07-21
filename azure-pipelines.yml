@@ -16,6 +16,10 @@ jobs:
     inputs:
       versionSpec: '3.7'
       architecture: 'x64'
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/TESTS-*.xml'
   - script: pip install tox
   - script: tox -e py37
 - job: pep8
