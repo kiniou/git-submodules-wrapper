@@ -1,5 +1,6 @@
-import daiquiri
+"""cli - Console Line Interface to git-submodules-wrapper module """
 import logging
+import daiquiri
 import click
 import click_completion
 from git import Repo
@@ -8,10 +9,10 @@ click_completion.init()
 daiquiri.setup()
 log = logging.getLogger(__name__)
 
-CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
+context_settings = dict(help_option_names=['-h', '--help'])
 
 
-@click.group(context_settings=CONTEXT_SETTINGS)
+@click.group(context_settings=context_settings)
 @click.option('-d', '--debug/--no-debug', help="debug logging", default=False)
 @click.pass_context
 def cli(ctx, debug):
@@ -24,9 +25,9 @@ def cli(ctx, debug):
         log.debug("Activating DEBUG logging")
 
 
-@cli.command()
+@cli.command("list")
 @click.pass_context
-def list(ctx):
+def list_submodules(ctx):
     """-- list submodules"""
     submodules = ["'%s' url:%s sha:%s" % (submodule.name,
                                           submodule.url,

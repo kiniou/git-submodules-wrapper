@@ -1,3 +1,4 @@
+"""__main__ - main entrypoint of git-submodule-wrapper module"""
 from .cli import cli
 from . import __appname__
 

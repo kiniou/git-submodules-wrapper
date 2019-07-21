@@ -1,3 +1,5 @@
+""" git-submodules-wrapper - extends 'git submodule' command """
+# pylint: disable=unused-import
 from .cli import cli
 from . import (
     upstream,
