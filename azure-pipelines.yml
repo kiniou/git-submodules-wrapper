@@ -16,7 +16,7 @@ jobs:
     inputs:
       versionSpec: '3.7'
       architecture: 'x64'
-  - script: pip install --user tox
+  - script: pip install tox
   - script: tox -e py37
 - job: pep8
   pool:
@@ -26,7 +26,7 @@ jobs:
     inputs:
       versionSpec: '3.7'
       architecture: 'x64'
-  - script: pip install --user tox
+  - script: pip install tox
   - script: tox -e flake8
 - job: pylint
   pool:
