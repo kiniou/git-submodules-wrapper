@@ -1,0 +1,40 @@
+name: $(Date:yyyyMMdd)$(Rev:.r)
+trigger:
+- master
+
+pr:
+  branches:
+    include:
+    - '*'
+
+jobs:
+- job: py37
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.7'
+      architecture: 'x64'
+  - script: pip install tox
+  - script: tox -e py37
+- job: pep8
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.7'
+      architecture: 'x64'
+  - script: pip install tox
+  - script: tox -e flake8
+- job: pylint
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.7'
+      architecture: 'x64'
+  - script: pip install tox
+  - script: tox -e pylint
