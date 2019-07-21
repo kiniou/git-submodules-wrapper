@@ -19,7 +19,7 @@ jobs:
     vmImage: 'Ubuntu-16.04'
   container: python37
   steps:
-  - script: pip install tox
+  - script: pip install --user tox
 - job: py37
   pool:
     vmImage: 'Ubuntu-16.04'
