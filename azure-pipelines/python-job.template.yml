@@ -20,5 +20,5 @@ jobs:
     displayName: Install Tox
   - script: tox -e ${{ parameters.toxenv }}
   - task: PublishTestResults@2
-    condition: ne('${{ parameters.publish }}', '{}')
+    condition: ne(${{ parameters.publish }}, {})
     inputs: ${{ parameters.publish }}
