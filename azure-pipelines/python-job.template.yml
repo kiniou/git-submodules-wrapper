@@ -14,11 +14,13 @@ jobs:
   pool: ${{ parameters.pool }}
   steps:
   - task: UsePythonVersion@0
-    displayName: Use of Python version ${{ parameters.use_python.versionSpec }}
+    displayName: 🐍 Use of Python version ${{ parameters.use_python.versionSpec }}
     inputs: ${{ parameters.use_python }}
   - script: pip install tox
-    displayName: Install Tox
+    displayName: 💾 Install Tox
   - script: tox -e ${{ parameters.toxenv }}
+    displayName: ⚙ Execute Tox “${{ parameters.toxenv }}„
   - task: PublishTestResults@2
+    displayName: 📜 Publish Tests Results
     condition: ${{ parameters.with_publish }}
     inputs: ${{ parameters.publish_options }}
