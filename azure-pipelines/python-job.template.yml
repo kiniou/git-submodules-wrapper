@@ -1,11 +1,11 @@
 parameters:
   pool:
     vmImage: 'Ubuntu-16.04'
-  python_version:
+  use_python:
     versionSpec: '3.7'
     architecture: 'x64'
-  publish: null
-  scripts: null
+  with_publish: false
+  publish_options: {}
   toxenv: ''
 
 jobs:
@@ -14,11 +14,11 @@ jobs:
   pool: ${{ parameters.pool }}
   steps:
   - task: UsePythonVersion@0
-    displayName: Use of Python version ${{ parameters.python_version.versionSpec }}
-    inputs: ${{ parameters.python_version }}
+    displayName: Use of Python version ${{ parameters.use_python.versionSpec }}
+    inputs: ${{ parameters.use_python }}
   - script: pip install tox
     displayName: Install Tox
   - script: tox -e ${{ parameters.toxenv }}
   - task: PublishTestResults@2
-    condition: ne(${{ parameters.publish }}, null)
-    inputs: ${{ parameters.publish }}
+    condition: ${{ parameters.with_publish }}
+    inputs: ${{ parameters.publish_options }}

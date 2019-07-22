@@ -11,7 +11,8 @@ jobs:
 - template: azure-pipelines/python-job.template.yml
   parameters:
     toxenv: 'py37'
-    publish:
+    with_publish: true
+    publish_options:
       testResultsFormat: 'Junit'
       testResultsFiles: '**/TESTS-*.xml'
 - template: azure-pipelines/python-job.template.yml
