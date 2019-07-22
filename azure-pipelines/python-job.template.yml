@@ -4,8 +4,8 @@ parameters:
   python_version:
     versionSpec: '3.7'
     architecture: 'x64'
-  publish: {}
-  scripts: {}
+  publish: null
+  scripts: null
   toxenv: ''
 
 jobs:
@@ -20,5 +20,5 @@ jobs:
     displayName: Install Tox
   - script: tox -e ${{ parameters.toxenv }}
   - task: PublishTestResults@2
-    condition: ne(${{ parameters.publish }}, {})
+    condition: ne(${{ parameters.publish }}, null)
     inputs: ${{ parameters.publish }}
