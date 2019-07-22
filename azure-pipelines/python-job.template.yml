@@ -1,12 +1,12 @@
 parameters:
-- pool:
+  pool:
     vmImage: 'Ubuntu-16.04'
-- python_version:
+  python_version:
     versionSpec: '3.7'
     architecture: 'x64'
-- publish: {}
-- scripts: {}
-- toxenv: ''
+  publish: {}
+  scripts: {}
+  toxenv: ''
 
 jobs:
 - job: ${{ parameters.toxenv }}

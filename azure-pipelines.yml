@@ -10,13 +10,13 @@ pr:
 jobs:
 - template: azure-pipelines/python-job.template.yml
   parameters:
-  - toxenv: 'py37'
-  - publish:
+    toxenv: 'py37'
+    publish:
       testResultsFormat: 'Junit'
       testResultsFiles: '**/TESTS-*.xml'
 - template: azure-pipelines/python-job.template.yml
   parameters:
-  - toxenv: 'pep8'
+    toxenv: 'pep8'
 - template: azure-pipelines/python-job.template.yml
   parameters:
-  - toxenv: 'pylint'
+    toxenv: 'pylint'
