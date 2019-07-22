@@ -8,37 +8,15 @@ pr:
     - '*'
 
 jobs:
-- job: py37
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '3.7'
-      architecture: 'x64'
-  - script: pip install tox
-  - script: tox -e py37
-  - task: PublishTestResults@2
-    inputs:
-      testResultsFormat: 'JUnit'
+- template: azure-pipelines/python-job.template.yml
+  parameters:
+  - toxenv: 'py37'
+  - publish:
+      testResultsFormat: 'Junit'
       testResultsFiles: '**/TESTS-*.xml'
-- job: pep8
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '3.7'
-      architecture: 'x64'
-  - script: pip install tox
-  - script: tox -e flake8
-- job: pylint
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '3.7'
-      architecture: 'x64'
-  - script: pip install tox
-  - script: tox -e pylint
+- template: azure-pipelines/python-job.template.yml
+  parameters:
+  - toxenv: 'pep8'
+- template: azure-pipelines/python-job.template.yml
+  parameters:
+  - toxenv: 'pylint'

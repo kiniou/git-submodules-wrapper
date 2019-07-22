@@ -1,0 +1,24 @@
+parameters:
+- pool:
+    vmImage: 'Ubuntu-16.04'
+- python_version:
+    versionSpec: '3.7'
+    architecture: 'x64'
+- publish: {}
+- scripts: {}
+- toxenv: ''
+
+jobs:
+- job: ${{ parameters.toxenv }}
+  condition: ne('${{ parameters.toxenv }}', '')
+  pool: ${{ parameters.pool }}
+  steps:
+  - task: UsePythonVersion@0
+    displayName: Use of Python version ${{ parameters.python_version.versionSpec }}
+    inputs: ${{ parameters.python_version }}
+  - script: pip install tox
+    displayName: Install Tox
+  - script: tox -e ${{ parameters.toxenv }}
+  - task: PublishTestResults@2
+    condition: ne('${{ parameters.publish }}', '{}')
+    inputs: ${{ parameters.publish }}
